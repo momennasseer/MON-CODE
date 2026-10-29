@@ -1,0 +1,547 @@
+/* =========================================
+   CAROUSEL  (recolored to the site palette)
+   cyan (0,140,255) -> site blue  (40,60,255)
+   ice  (100,210,255) -> bright   (125,145,255)
+   deep glows         -> royal    (30,40,235)
+   ========================================= */
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 16px;
+    --outer-r: 24px;
+    --p-distance: 12px;
+    margin: 0 auto;
+    direction: ltr;
+}
+
+.carousel-track {
+    display: flex;
+}
+
+.carousel-item {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    border: 1px solid var(--line);
+    border-radius: calc(var(--outer-r) - var(--p-distance));
+    background: linear-gradient(160deg, var(--chrome-deep), var(--chrome));
+    overflow: hidden;
+    cursor: grab;
+}
+
+.carousel-item:active {
+    cursor: grabbing;
+}
+
+
+/* =========================================
+   ROUND CONTAINER
+   ========================================= */
+
+.carousel-container.round {
+    position: relative;
+    border: 1px solid rgba(var(--glow-rgb),0.30);
+    border-radius: 50%;
+    box-shadow:
+        0 0 15px rgba(var(--glow-rgb),0.16),
+        0 0 35px rgba(var(--glow-rgb),0.10),
+        0 0 70px rgba(var(--glow-rgb),0.06);
+}
+
+
+/* =========================================
+   ROUND CARD  (inner + outer glow)
+   ========================================= */
+
+.carousel-item.round {
+    position: relative;
+    bottom: 0.1em;
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(var(--glow-rgb),0.20) 0%,
+            rgba(var(--dark-rgb),0.80) 38%,
+            color-mix(in srgb,#0c0c0c var(--keep-dark),rgb(var(--dark-rgb))) 78%
+        );
+    border: 1px solid rgba(var(--glow-rgb),0.50);
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow:
+        /* outside */
+        0 0 8px rgba(var(--glow-rgb),0.60),
+        0 0 20px rgba(var(--glow-rgb),0.42),
+        0 0 40px rgba(var(--glow-rgb),0.26),
+        0 0 75px rgba(var(--glow-rgb),0.14),
+        /* inside */
+        inset 0 0 12px rgba(var(--glow-rgb),0.35),
+        inset 0 0 30px rgba(var(--glow-rgb),0.22),
+        inset 0 0 60px rgba(var(--glow-rgb),0.10);
+    transition:
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+
+/* =========================================
+   OUTER RING
+   ========================================= */
+
+.carousel-item.round::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1px solid rgba(var(--glow-rgb),0.30);
+    box-shadow:
+        0 0 12px rgba(var(--glow-rgb),0.32),
+        0 0 28px rgba(var(--glow-rgb),0.20),
+        0 0 55px rgba(var(--glow-rgb),0.12);
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+/* =========================================
+   INNER RING
+   ========================================= */
+
+.carousel-item.round::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    box-shadow:
+        inset 0 0 12px rgba(var(--glow-rgb),0.30),
+        inset 0 0 28px rgba(var(--glow-rgb),0.18),
+        inset 0 0 50px rgba(var(--glow-rgb),0.08);
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+/* =========================================
+   HOVER
+   ========================================= */
+
+.carousel-item.round:hover {
+    border-color: rgba(var(--glow-rgb),0.75);
+    box-shadow:
+        /* outside */
+        0 0 10px rgba(var(--glow-rgb),0.72),
+        0 0 25px rgba(var(--glow-rgb),0.52),
+        0 0 50px rgba(var(--glow-rgb),0.34),
+        0 0 90px rgba(var(--glow-rgb),0.18),
+        /* inside */
+        inset 0 0 15px rgba(var(--glow-rgb),0.42),
+        inset 0 0 35px rgba(var(--glow-rgb),0.25),
+        inset 0 0 65px rgba(var(--glow-rgb),0.12);
+}
+
+
+/* =========================================
+   ROUND HEADER
+   ========================================= */
+
+.carousel-item-header.round {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 3;
+}
+
+
+/* =========================================
+   ICON CONTAINER
+   ========================================= */
+
+.carousel-icon-container {
+    display: flex;
+    height: 44px;
+    width: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(140deg, rgba(var(--glow-rgb),0.24), rgba(var(--glow-rgb),0.12));
+    border: 1px solid rgba(var(--glow-rgb),0.35);
+    box-shadow:
+        0 0 10px rgba(var(--glow-rgb),0.35),
+        0 0 22px rgba(var(--glow-rgb),0.18);
+    position: relative;
+    z-index: 4;
+}
+
+
+/* =========================================
+   ICON
+   ========================================= */
+
+.carousel-icon {
+    height: 20px;
+    width: 20px;
+    color: var(--chrome-hi);
+    filter: drop-shadow(0 0 5px rgba(var(--glow-rgb),0.7));
+}
+
+
+/* =========================================
+   CONTENT
+   ========================================= */
+
+.carousel-item-content {
+    padding: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    z-index: 3;
+}
+
+
+/* =========================================
+   TITLE
+   ========================================= */
+
+.carousel-item-title {
+    margin-bottom: 6px;
+    font-weight: 800;
+    font-size: 19px;
+    color: var(--silver);
+    text-shadow: 0 0 8px rgba(var(--glow-rgb),0.30);
+}
+
+
+/* =========================================
+   DESCRIPTION
+   ========================================= */
+
+.carousel-item-description {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   INDICATORS
+   ========================================= */
+
+.carousel-indicators-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.carousel-indicators-container.round {
+    position: absolute;
+    z-index: 5;
+    bottom: 3em;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.carousel-indicators {
+    margin-top: 16px;
+    display: flex;
+    width: 150px;
+    justify-content: space-between;
+    padding: 0 32px;
+}
+
+.carousel-indicator {
+    height: 8px;
+    width: 8px;
+    border: none;
+    padding: 0;
+    appearance: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition:
+        background-color 150ms,
+        box-shadow 150ms,
+        transform 150ms;
+}
+
+.carousel-indicator.active {
+    background-color: var(--chrome-hi);
+    box-shadow:
+        0 0 8px rgba(var(--glow-rgb),0.75),
+        0 0 16px rgba(var(--glow-rgb),0.45);
+}
+
+.carousel-indicator.inactive {
+    background-color: rgba(var(--glow-rgb),0.35);
+}
+
+.carousel-indicator:focus-visible {
+    outline: 2px solid var(--chrome-hi);
+    outline-offset: 2px;
+}
+
+
+/* =========================================
+   EXTRA GLOW / SHADOW / LIGHTING
+   (kept blue-tinted on purpose: no black
+   square shadows behind the carousel)
+   ========================================= */
+
+/* ---------- container: ambient glow + soft rounded ground shadow ---------- */
+.carousel-container {
+    box-shadow:
+        0 0 30px rgba(var(--glow-rgb),0.14),
+        0 0 70px rgba(var(--glow-rgb),0.08),
+        inset 0 0 40px rgba(var(--glow-rgb),0.06);
+    filter:
+        drop-shadow(0 14px 22px rgba(var(--dark-rgb),0.40))
+        drop-shadow(0 0 16px rgba(var(--glow-rgb),0.18));
+}
+
+.carousel-container.round {
+    box-shadow:
+        0 0 22px rgba(var(--glow-rgb),0.26),
+        0 0 50px rgba(var(--glow-rgb),0.16),
+        0 0 100px rgba(var(--glow-rgb),0.10),
+        inset 0 0 40px rgba(var(--glow-rgb),0.08);
+}
+
+
+/* ---------- normal cards: glow + depth + top light ---------- */
+.carousel-item {
+    box-shadow:
+        0 0 14px rgba(var(--glow-rgb),0.35),
+        0 8px 22px rgba(var(--dark-rgb),0.50),
+        inset 0 1px 0 rgba(var(--glow-rgb),0.35),
+        inset 0 0 26px rgba(var(--glow-rgb),0.10);
+    transition:
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.carousel-item:hover {
+    border-color: rgba(var(--glow-rgb),0.60);
+    box-shadow:
+        0 0 22px rgba(var(--glow-rgb),0.55),
+        0 0 44px rgba(var(--glow-rgb),0.30),
+        0 10px 26px rgba(var(--dark-rgb),0.55),
+        inset 0 1px 0 rgba(var(--glow-rgb),0.45),
+        inset 0 0 30px rgba(var(--glow-rgb),0.14);
+}
+
+/* soft light falling from the top-left corner */
+.carousel-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at 25% 0%,
+        rgba(var(--glow-rgb),0.22),
+        transparent 60%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+/* ---------- round card: stronger light + breathing ring ---------- */
+.carousel-item.round {
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(var(--glow-rgb),0.22) 0%,
+            transparent 45%
+        ),
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(var(--glow-rgb),0.24) 0%,
+            rgba(var(--dark-rgb),0.80) 38%,
+            color-mix(in srgb,#0c0c0c var(--keep-dark),rgb(var(--dark-rgb))) 78%
+        );
+    box-shadow:
+        /* outside */
+        0 0 10px rgba(var(--glow-rgb),0.70),
+        0 0 26px rgba(var(--glow-rgb),0.50),
+        0 0 52px rgba(var(--glow-rgb),0.32),
+        0 0 95px rgba(var(--glow-rgb),0.18),
+        /* soft blue shadow underneath */
+        0 18px 40px rgba(var(--glow-rgb),0.28),
+        /* inside */
+        inset 0 0 14px rgba(var(--glow-rgb),0.40),
+        inset 0 0 34px rgba(var(--glow-rgb),0.24),
+        inset 0 0 64px rgba(var(--glow-rgb),0.12),
+        inset 0 2px 0 rgba(var(--glow-rgb),0.35);
+}
+
+/* the ring must not inherit the sheen used by normal cards */
+.carousel-item.round::before {
+    background: none;
+    animation: carouselRingPulse 4s ease-in-out infinite;
+}
+
+@keyframes carouselRingPulse {
+    0%, 100% {
+        opacity: 0.65;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* ---------- icon / text lighting ---------- */
+.carousel-icon-container {
+    box-shadow:
+        0 0 12px rgba(var(--glow-rgb),0.45),
+        0 0 26px rgba(var(--glow-rgb),0.25),
+        inset 0 0 10px rgba(var(--glow-rgb),0.25);
+}
+
+.carousel-icon {
+    filter:
+        drop-shadow(0 0 4px rgba(var(--glow-rgb),0.9))
+        drop-shadow(0 0 10px rgba(var(--glow-rgb),0.6));
+}
+
+.carousel-item-title {
+    text-shadow:
+        0 0 10px rgba(var(--glow-rgb),0.45),
+        0 0 24px rgba(var(--glow-rgb),0.30);
+}
+
+.carousel-indicator.active {
+    box-shadow:
+        0 0 8px rgba(var(--glow-rgb),0.90),
+        0 0 18px rgba(var(--glow-rgb),0.60),
+        0 0 30px rgba(var(--glow-rgb),0.30);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    .carousel-item.round::before {
+        animation: none;
+    }
+}
+
+
+/* =========================================
+   STRONGER LIGHTING ON HOVER
+   ========================================= */
+
+/* container lights up when the pointer is over it */
+.carousel-container {
+    transition:
+        box-shadow 0.4s ease,
+        filter 0.4s ease,
+        border-color 0.4s ease;
+}
+
+.carousel-container:hover {
+    border-color: rgba(var(--glow-rgb),0.45);
+    box-shadow:
+        0 0 40px rgba(var(--glow-rgb),0.30),
+        0 0 90px rgba(var(--glow-rgb),0.18),
+        inset 0 0 50px rgba(var(--glow-rgb),0.10);
+    filter:
+        drop-shadow(0 14px 22px rgba(var(--dark-rgb),0.40))
+        drop-shadow(0 0 28px rgba(var(--glow-rgb),0.40));
+}
+
+.carousel-container.round:hover {
+    box-shadow:
+        0 0 34px rgba(var(--glow-rgb),0.45),
+        0 0 80px rgba(var(--glow-rgb),0.28),
+        0 0 140px rgba(var(--glow-rgb),0.16),
+        inset 0 0 50px rgba(var(--glow-rgb),0.12);
+}
+
+
+/* normal cards: brighter glow, stronger top light */
+.carousel-item:hover {
+    border-color: rgba(var(--glow-rgb),0.85);
+    box-shadow:
+        0 0 26px rgba(var(--glow-rgb),0.75),
+        0 0 56px rgba(var(--glow-rgb),0.50),
+        0 0 100px rgba(var(--glow-rgb),0.28),
+        0 12px 28px rgba(var(--dark-rgb),0.55),
+        inset 0 1px 0 rgba(var(--glow-rgb),0.60),
+        inset 0 0 36px rgba(var(--glow-rgb),0.22);
+}
+
+.carousel-item::before {
+    transition: background 0.4s ease;
+}
+
+.carousel-item:hover::before {
+    background: radial-gradient(
+        ellipse at 25% 0%,
+        rgba(var(--glow-rgb),0.42),
+        transparent 65%
+    );
+}
+
+
+/* round card: much stronger light on hover */
+.carousel-item.round:hover {
+    border-color: rgba(var(--glow-rgb),0.95);
+    box-shadow:
+        /* outside */
+        0 0 14px rgba(var(--glow-rgb),0.95),
+        0 0 34px rgba(var(--glow-rgb),0.75),
+        0 0 70px rgba(var(--glow-rgb),0.50),
+        0 0 130px rgba(var(--glow-rgb),0.30),
+        0 20px 46px rgba(var(--glow-rgb),0.38),
+        /* inside */
+        inset 0 0 18px rgba(var(--glow-rgb),0.60),
+        inset 0 0 44px rgba(var(--glow-rgb),0.36),
+        inset 0 0 80px rgba(var(--glow-rgb),0.20),
+        inset 0 2px 0 rgba(var(--glow-rgb),0.55);
+}
+
+.carousel-item.round:hover::before {
+    animation: none;
+    opacity: 1;
+    border-color: rgba(var(--glow-rgb),0.60);
+    box-shadow:
+        0 0 18px rgba(var(--glow-rgb),0.60),
+        0 0 40px rgba(var(--glow-rgb),0.40),
+        0 0 80px rgba(var(--glow-rgb),0.22);
+}
+
+.carousel-item.round:hover::after {
+    box-shadow:
+        inset 0 0 16px rgba(var(--glow-rgb),0.50),
+        inset 0 0 38px rgba(var(--glow-rgb),0.30),
+        inset 0 0 64px rgba(var(--glow-rgb),0.14);
+}
+
+
+/* icon, title and indicator brighten together */
+.carousel-item:hover .carousel-icon-container {
+    border-color: rgba(var(--glow-rgb),0.70);
+    box-shadow:
+        0 0 16px rgba(var(--glow-rgb),0.70),
+        0 0 34px rgba(var(--glow-rgb),0.40),
+        inset 0 0 12px rgba(var(--glow-rgb),0.40);
+}
+
+.carousel-item:hover .carousel-icon {
+    filter:
+        drop-shadow(0 0 5px rgba(var(--glow-rgb),1))
+        drop-shadow(0 0 14px rgba(var(--glow-rgb),0.85));
+}
+
+.carousel-item:hover .carousel-item-title {
+    text-shadow:
+        0 0 12px rgba(var(--glow-rgb),0.70),
+        0 0 30px rgba(var(--glow-rgb),0.50);
+}
+
+.carousel-indicator:hover {
+    background-color: rgba(var(--glow-rgb),0.70);
+    box-shadow: 0 0 10px rgba(var(--glow-rgb),0.70);
+    transform: scale(1.25);
+}

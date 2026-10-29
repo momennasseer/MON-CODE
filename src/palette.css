@@ -1,0 +1,133 @@
+/* =====================================================================
+   COLOUR PALETTES  (colours only — no layout / animation lives here)
+
+   Pick a palette in index.html:   <html data-palette="ice">
+       ice      steel-blue glow on black   (default)
+       violet   soft violet glow
+       emerald  mint / teal glow
+       silver   the previous neutral silver look
+
+   Every glow, border, highlight and the animated background take their
+   colour from the variables below, so you can also tune a palette by
+   editing --glow-rgb (and the --fog-* colours for the background).
+   ===================================================================== */
+
+:root,
+html[data-palette="ice"] {
+    --glow-rgb: 128,184,255;      /* accent used for glows, lines, borders   */
+    --dark-rgb: 4,9,20;           /* tint for dark overlays / shadows        */
+    --keep: 74%;                  /* how much of the original chrome tone survives in metallic gradients */
+    --keep-dark: 86%;
+
+    --bg: #01040a;
+    --bg-2: #050b16;
+    --bg-3: #0a1424;
+    --line: rgba(128,184,255,.20);
+    --silver: #e7f1ff;
+    --silver-dim: #8fa6c6;
+    --chrome: #b4d0f7;
+    --chrome-hi: #f2f8ff;
+    --chrome-deep: #12233f;
+    --chrome-mid: #6b8dba;
+    --text: #e8f1fd;
+    --text-dim: #93a9c8;
+
+    --fog-1: #132a52;             /* animated background colours */
+    --fog-2: #5b92da;
+    --fog-3: #eaf4ff;
+    --bolt-hue: 212;              /* preloader lightning */
+    --bolt-sat: .6;
+    --star-rgb: 186,214,255;
+    --loop-text: #e6f0ffb8;       /* "MØN CODE" ticker bands */
+    --loop-ribbon: rgba(128,184,255,.06);
+    --meta-bg: #01040a;
+}
+
+html[data-palette="violet"] {
+    --glow-rgb: 176,152,255;
+    --dark-rgb: 10,6,22;
+    --keep: 74%;
+    --keep-dark: 86%;
+    --bg: #04020b;
+    --bg-2: #0a0716;
+    --bg-3: #130e26;
+    --line: rgba(176,152,255,.20);
+    --silver: #efeaff;
+    --silver-dim: #a095c4;
+    --chrome: #cbbff7;
+    --chrome-hi: #f7f3ff;
+    --chrome-deep: #1e1740;
+    --chrome-mid: #8473b8;
+    --text: #efebfd;
+    --text-dim: #a69cc8;
+    --fog-1: #25194d;
+    --fog-2: #8468d6;
+    --fog-3: #f1ecff;
+    --bolt-hue: 262;
+    --bolt-sat: .55;
+    --star-rgb: 214,200,255;
+    --loop-text: #efeaffb8;
+    --loop-ribbon: rgba(176,152,255,.06);
+    --meta-bg: #04020b;
+}
+
+html[data-palette="emerald"] {
+    --glow-rgb: 110,232,200;
+    --dark-rgb: 3,14,14;
+    --keep: 74%;
+    --keep-dark: 86%;
+    --bg: #010806;
+    --bg-2: #04120f;
+    --bg-3: #09201b;
+    --line: rgba(110,232,200,.20);
+    --silver: #e6fff7;
+    --silver-dim: #86b5a8;
+    --chrome: #aeeedb;
+    --chrome-hi: #f0fffa;
+    --chrome-deep: #0f302a;
+    --chrome-mid: #5fa592;
+    --text: #e8faf4;
+    --text-dim: #8fb9ad;
+    --fog-1: #0d3a31;
+    --fog-2: #43b79a;
+    --fog-3: #e9fff8;
+    --bolt-hue: 164;
+    --bolt-sat: .5;
+    --star-rgb: 190,255,232;
+    --loop-text: #e4fff5b8;
+    --loop-ribbon: rgba(110,232,200,.06);
+    --meta-bg: #010806;
+}
+
+html[data-palette="silver"] {
+    --glow-rgb: 176,178,181;
+    --dark-rgb: 12,12,12;
+    --keep: 100%;
+    --keep-dark: 100%;
+    --bg: #000000;
+    --bg-2: #080808;
+    --bg-3: #0f1010;
+    --line: rgba(200,206,218,0.16);
+    --silver: #e8eaf0;
+    --silver-dim: #9a9ea9;
+    --chrome: #c3c8d2;
+    --chrome-hi: #f1f3f8;
+    --chrome-deep: #2b2c2d;
+    --chrome-mid: #8f949f;
+    --text: #eceef3;
+    --text-dim: #a2a6b0;
+    --fog-1: #3b3e46;
+    --fog-2: #9ea4b0;
+    --fog-3: #ffffff;
+    --bolt-hue: 215;
+    --bolt-sat: .1;
+    --star-rgb: 226,230,240;
+    --loop-text: #eef0f4ad;
+    --loop-ribbon: rgba(220,225,235,.04);
+    --meta-bg: #000000;
+}
+
+html,
+body {
+    background: var(--bg);
+}

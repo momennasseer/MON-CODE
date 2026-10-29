@@ -1,0 +1,271 @@
+.text-loop {
+  position: relative;
+  width: 100%;
+  height: 42px;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  display: block;
+  box-sizing: border-box;
+  background: var(--loop-ribbon);
+
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 1.5%,
+    black 98.5%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 1.5%,
+    black 98.5%,
+    transparent 100%
+  );
+}
+
+/* =========================
+   الحركة الأساسية
+========================= */
+
+.text-loop-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+
+  width: max-content;
+  height: 100%;
+
+  animation-name: textLoopForward;
+  animation-duration: var(--loop-speed, 100s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+
+  /* تحسين السلاسة */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* الاتجاه العكسي */
+
+.text-loop-track.text-loop-reverse {
+  animation-name: textLoopReverse;
+}
+
+/* =========================
+   مجموعة الكلام
+========================= */
+
+.text-loop-group {
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  width: max-content;
+  height: 100%;
+
+  white-space: nowrap;
+}
+
+/* =========================
+   الكلام
+========================= */
+
+.text-loop-item {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  height: 100%;
+
+  padding: 0 13px;
+
+  box-sizing: border-box;
+
+  white-space: nowrap;
+
+  font-family:
+    'Orbitron',
+    'Montserrat',
+    Arial,
+    sans-serif;
+
+  font-size: var(--loop-font-size);
+  font-weight: var(--loop-font-weight);
+
+  letter-spacing: var(--loop-letter-spacing);
+
+  line-height: 1;
+
+  /* لون ثابت بدل Animation لكل كلمة */
+  color: var(--loop-color);
+
+  /* لمعة ثابتة خفيفة */
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.35),
+    0 0 7px rgba(var(--glow-rgb),0.18);
+
+  /* تحسين شكل النص */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================
+   لمعة متحركة على الشريط
+========================= */
+
+.text-loop::after {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: -30%;
+
+  width: 12%;
+  height: 100%;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 20%,
+    rgba(255, 255, 255, 0.16) 45%,
+    rgba(255, 255, 255, 0.30) 50%,
+    rgba(255, 255, 255, 0.12) 60%,
+    transparent 100%
+  );
+
+  transform: skewX(-18deg);
+
+  filter: blur(1px);
+
+  animation: lineShine 7s linear infinite;
+
+  will-change: left, opacity;
+}
+
+/* =========================
+   حركة للأمام
+========================= */
+
+@keyframes textLoopForward {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* =========================
+   حركة للخلف
+========================= */
+
+@keyframes textLoopReverse {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* =========================
+   لمعة الخط
+========================= */
+
+@keyframes lineShine {
+  0% {
+    left: -30%;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.5;
+  }
+
+  45% {
+    opacity: 0.8;
+  }
+
+  60% {
+    opacity: 0;
+  }
+
+  100% {
+    left: 115%;
+    opacity: 0;
+  }
+}
+
+/* =========================
+   Hover
+========================= */
+
+.text-loop-pause:hover {
+  animation-play-state: paused;
+}
+
+.text-loop-pause:hover .text-loop-item {
+  animation-play-state: paused;
+}
+
+/* =========================
+   الخطين لازقين في بعض
+========================= */
+
+.text-loop-band {
+  width: 100%;
+  height: 42px;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: block;
+
+  line-height: 0;
+}
+
+.text-loop-band + .text-loop-band {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 767px) {
+  .text-loop {
+    height: 36px;
+  }
+
+  .text-loop-band {
+    height: 36px;
+  }
+
+  .text-loop-item {
+    font-size: 16px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    letter-spacing: 1.5px;
+  }
+}
